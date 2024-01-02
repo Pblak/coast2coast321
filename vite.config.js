@@ -10,6 +10,7 @@ export default defineConfig({
         vue(),
         laravel({
             input: [
+                'resources/css/_icons.css',
                 'resources/css/app.css',
                 'resources/css/bootstrap.scss',
                 'resources/js/app.js',
