@@ -2,7 +2,7 @@
     <div class="p-4 ">
         <div class="grid lg:grid-cols-6 gap-4">
             <div class="col-span-full">
-                <div class="bg-gray-800 rounded-lg p-4 overflow-x-auto overflow-y-hidden">
+                <div class="dark:bg-gray-800 bg-gray-200 rounded-lg p-4 overflow-x-auto overflow-y-hidden">
                     <div class=" flex gap-6 w-fit items-center">
                         <template v-for="(image,key) in images " :key="key">
                             <div
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-span-2">
-                <div class="bg-gray-800 p-4 rounded-lg flex flex-col gap-4">
+                <div class="dark:bg-gray-800 bg-gray-200 p-4 rounded-lg flex flex-col gap-4">
                     <div class="relative z-0 w-full  group">
                         <input type="text" name="title" id="title"
                                placeholder=" " class="float_input peer" v-model="formData.title"/>
@@ -109,13 +109,13 @@
                 </div>
             </div>
             <div class="col-span-4">
-                <div class="flex flex-col gap-4 p-4 bg-gray-800 rounded-lg">
+                <div class="flex flex-col gap-4 p-4 dark:bg-gray-800 bg-gray-200 rounded-lg">
                     <div class="">
                         <p class="text-2xl">Details</p>
                     </div>
                     <hr class="border-b-1  border-gray-500">
                     <div class="grid md:grid-cols-4 grid-cols-1 gap-4">
-                        <div class="flex-col flex gap-4 bg-gray-900 p-4 rounded-lg md:col-span-full ">
+                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-50 p-4 rounded-lg md:col-span-full ">
                             <div class="font-bold text-lg">
                                 <p>Properties </p>
                             </div>
@@ -143,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-col flex gap-4 bg-gray-900 p-4 rounded-lg md:col-span-full ">
+                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-50 p-4 rounded-lg md:col-span-full ">
                             <div class="font-bold text-lg">
                                 <p>Area & Measurement </p>
                             </div>
@@ -183,7 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-col flex gap-4 bg-gray-900 p-4 rounded-lg md:col-span-full ">
+                    <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-50 p-4 rounded-lg md:col-span-full ">
                         <div class="font-bold text-lg">
                             <p>Floors </p>
                         </div>
@@ -194,7 +194,7 @@
                         </div>
                         <div class="grid lg:grid-cols-3 gap-4">
                             <div v-for="(floor,key) in formData.floors" :key="key"
-                                 class="flex flex-col gap-4 p-4 bg-gray-950 rounded-lg">
+                                 class="flex flex-col gap-4 p-4 dark:bg-gray-950 bg-gray-200 shadow-lg border border-gray-300 dark:border-gray-800 rounded-lg">
                                 <div class="flex justify-end">
                                     <Btn icon-class="fa-duotone fa-trash !m-0 " class="_btn _btn-danger px-3 "
                                          :onClick="deleteFloor" :data="key"></Btn>

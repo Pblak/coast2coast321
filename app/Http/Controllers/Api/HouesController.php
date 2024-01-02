@@ -96,7 +96,9 @@ class HouesController extends Controller
 
             DB::commit();
             return response()->json([
-                'message' => 'House '.$request->title.' successfully update ', '_t' => true,
+                'message' => 'House '.$request->title.' successfully update ',
+                '_t' => true,
+                '_r'=>'list_houses'
             ]);
         } catch (\Exception $exception) {
             DB::rollBack();
@@ -179,7 +181,9 @@ class HouesController extends Controller
             DB::commit();
             return response()->json([
                 'message' => 'New house successfully created ', '_t' => true,
+                '_r'=>'list_houses'
             ]);
+
         } catch (\Exception $exception) {
             DB::rollBack();
             // dd($exception->getMessage());
