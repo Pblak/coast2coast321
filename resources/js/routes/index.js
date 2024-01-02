@@ -15,6 +15,7 @@ const routes =
             meta: {
                 middleware: ['guest'],
             },
+            redirect: {name:'login'},
             component: home
         },
         {
