@@ -109,7 +109,7 @@
                     </div>
                     <hr class="border-b-1  border-gray-500">
                     <div class="grid md:grid-cols-4 grid-cols-1 gap-4">
-                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-400 p-4 rounded-lg md:col-span-full ">
+                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-300 p-4 rounded-lg md:col-span-full ">
                             <div class="font-bold text-lg">
                                 <p>Properties </p>
                             </div>
@@ -137,7 +137,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-400 p-4 rounded-lg md:col-span-full ">
+                        <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-300 p-4 rounded-lg md:col-span-full ">
                             <div class="font-bold text-lg">
                                 <p>Area & Measurement </p>
                             </div>
@@ -177,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-400 p-4 rounded-lg md:col-span-full ">
+                    <div class="flex-col flex gap-4 dark:bg-gray-900 bg-gray-300 p-4 rounded-lg md:col-span-full ">
                         <div class="font-bold text-lg">
                             <p>Floors </p>
                         </div>
