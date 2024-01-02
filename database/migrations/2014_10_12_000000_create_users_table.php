@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->binary('avatar');
-            $table->string('institute_name')->nullable();
-            $table->string('student_number')->nullable();
+            $table->enum('type',['admin','user','client'])->default('user');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
