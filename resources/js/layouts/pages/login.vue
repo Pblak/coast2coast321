@@ -56,7 +56,7 @@
                                          class="w-full flex items-center justify-center
                                          border-gray-300 p-3 cursor-pointer "
                                          type="submit">
-                                <i class="fa-solid fa-gauge-simple mr-2"></i> Registeur
+                                <i class="fa-solid fa-gauge-simple mr-2"></i> Register
                             </router-link>
                         </div>
                     </div>
