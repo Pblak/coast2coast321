@@ -217,7 +217,6 @@ const routes =
                                     'value': to.params.id,
                                 }).then((res) => {
                                     to.meta.data = res.data
-                                    console.log(res.data , res.data.user ,  store.state.auth.user.user_id)
                                     if (res.data.user_id ===  store.state.auth.user.id){
                                         next()
                                     }else {
