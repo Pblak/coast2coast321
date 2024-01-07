@@ -43,5 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'address' => 'object',
     ];
+
+
+    public function houses(){
+        return $this->hasMany(House::class);
+    }
 }

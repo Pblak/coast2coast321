@@ -14,6 +14,9 @@
         'resources/js/app.js',
         ])
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+
 </head>
 <body class="dark:bg-gray-900 dark:text-gray-50">
 <div id="app"></div>

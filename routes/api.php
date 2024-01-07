@@ -26,6 +26,8 @@ Route::group(['prefix' => 'cPanel', 'middleware' => [ 'auth:sanctum']], function
     Route::post('house/get_house', [App\Http\Controllers\Api\HouesController::class, 'get_house']);
     Route::get('house/get_all', [App\Http\Controllers\Api\HouesController::class, 'get_all']);
 
+    Route::get('user/get_all', [App\Http\Controllers\Api\UserAuthController::class, 'get_all']);
+
 
     /*Route::get('book/get_all', [App\Http\Controllers\Api\BookController::class, 'get_all']);
     Route::get('book/get_levels', [App\Http\Controllers\Api\BookController::class, 'get_levels']);

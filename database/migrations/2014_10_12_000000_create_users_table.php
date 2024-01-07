@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->binary('avatar');
-            $table->enum('type',['admin','user','client'])->default('user');
+            $table->enum('type',['admin','client','broker', 'landlord'])->default('broker');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();

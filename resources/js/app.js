@@ -11,7 +11,7 @@ import VueDatePicker from '../../node_modules/@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import 'flowbite';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-
+import  "datatables.net-dt/css/jquery.dataTables.min.css";
 
 const app = createApp(appLayouts)
 

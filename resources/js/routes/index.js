@@ -97,10 +97,10 @@ const routes =
                 {
                     path: 'broker',
                     meta: {
-                        __name: 'Renter',
+                        __name: 'Broker & Landlord',
                         icon: '<i class="fa-thin fa-house-person-leave"></i>',
                         current: false,
-                        sideBar: false,
+                        sideBar: true,
                     },
                     components: {
                         cPanel: {
@@ -109,15 +109,27 @@ const routes =
                     },
                     children: [
                         {
-                            path: 'list_renters',
-                            name: 'list_renters',
+                            path: 'list_broker',
+                            name: 'list_broker',
                             meta: {
-                                __name: 'Renters List',
+                                __name: 'Broker List',
                                 toggle: false,
                                 sideBar: true,
                             },
                             components: {
-                                broker: () => import('../layouts/cPanel/broker/list_renters.vue')
+                                broker: () => import('../layouts/cPanel/broker_landlord/list_broker.vue')
+                            },
+                        },
+                        {
+                            path: 'list_landlord',
+                            name: 'list_landlord',
+                            meta: {
+                                __name: 'Landlord List',
+                                toggle: false,
+                                sideBar: true,
+                            },
+                            components: {
+                                broker: () => import('../layouts/cPanel/broker_landlord/list_landlord.vue')
                             },
                         },
                         {
@@ -126,10 +138,10 @@ const routes =
                             meta: {
                                 __name: 'Create new Renter',
                                 toggle: false,
-                                sideBar: true,
+                                sideBar: false,
                             },
                             components: {
-                                broker: () => import('../layouts/cPanel/broker/create_renters.vue')
+                                broker: () => import('../layouts/cPanel/broker_landlord/create_renters.vue')
                             },
                         },
                     ]

@@ -13,6 +13,12 @@ use Illuminate\Validation\Rules\Password;
 
 class   UserAuthController extends Controller
 {
+
+    public function get_all(): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return User::with(['houses'])->get();
+    }
+
     //
     public function login_cpanel(Request $request): JsonResponse
     {

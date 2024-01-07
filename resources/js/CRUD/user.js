@@ -12,8 +12,18 @@ export default () => {
 
         })
     }
+    const get_users = async (data) => {
+        return await axios.get('/sanctum/csrf-cookie').then(response => {
+            return axios.get(`/api/cPanel/user/get_all`)
+                .catch(err => {
+                    errors.value = err.response.data.errors
+                })
+
+        })
+    }
     return {
         errors,
         register,
+        get_users,
     }
 }
