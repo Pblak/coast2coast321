@@ -78,7 +78,6 @@ export default {
       myChart.update()
     }
 
-
     onMounted(() => {
       _myChart()
       darkMode_event()
