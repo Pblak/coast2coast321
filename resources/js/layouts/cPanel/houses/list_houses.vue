@@ -129,7 +129,7 @@
                                                     class="grid md:grid-cols-3 grid-cols-2 gap-4 font-semibold text-xs">
                                                     <div class="flex flex-col gap-2  ">
                                                         <div class="">
-                                                            Bedroom
+                                                            Bedrooms
                                                         </div>
                                                         <p class="text-sm font-bold">
                                                             {{ countRooms(house.specification.floors) }}
@@ -222,7 +222,9 @@ export default {
         },
     },
     mounted() {
-        this.getHouses()
+        this.getHouses().then((res)=>{
+            this.houses = res.data
+        })
     },
     data() {
         const images = ref([])

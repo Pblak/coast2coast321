@@ -254,8 +254,8 @@
                 </div>
             </div>
             <div class="lg:col-span-full">
-                <div class="flex justify-end">
-                    <Btn class="_btn _btn-success text-lg" :onClick="save">
+                <div class="flex ">
+                    <Btn class="_btn _btn-success text-lg" :onClick="save" >
                         Save <!--:disabled="!formVerify()"-->
                     </Btn>
                 </div>

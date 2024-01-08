@@ -54,7 +54,6 @@ export default {
                     },
                     {
                         render: (data, type, row) => {
-
                             return  row.houses.length
                         },
                         targets: 2

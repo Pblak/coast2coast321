@@ -6,7 +6,7 @@
         <i v-if="!clickable" class="fa-duotone fa-spinner-third fa-spin fa-lg mr-2"></i>
         <i v-else-if="loader" :class="iconClass" class="mr-2"></i>
         <slot/>
-        <div v-if="confirm" :class="[ isConfirm?'w-10 ':'w-0 ring-0  opacity-0'] "
+        <div v-if="confirm" :class="[isConfirm?'w-10 ':'w-0 ring-0  opacity-0']"
                 @click="confirmed"
              class="bg-green-200 absolute top-0 bottom-0 left-full   rounded-r-lg overflow-hidden ml-1 ring-4 ring-green-400
                     flex items-center text-gray-700 justify-center font-black hover:bg-green-500 hover:text-white transition-all">OK</div>
@@ -48,7 +48,6 @@ export default {
             this.submit()
         },
         submit() {
-
             this.isConfirm = false; // if confirmation is required
             if (!this.clickable) return;
             return new Promise((resolve, reject) => {

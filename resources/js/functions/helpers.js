@@ -3,6 +3,10 @@ import {createToast, withProps} from "@/functions/mosha-vue-toastify.es";
 import toastTmpl from "../../views/components/toastTmpl.vue";
 import router from "@/routes";
 
+export const getRandomInt = (min, max)=> {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 /**
  * switch theme and return true if the final them is dark
  * and dispatchEvent "themeChange" when changes are made

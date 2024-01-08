@@ -55,9 +55,7 @@ export default () => {
     }
     const getHouses = async () => {
         return await axios.get('/sanctum/csrf-cookie').then(response => {
-            return axios.get(`/api/cPanel/house/get_all`).then(response => {
-                houses.value = response.data
-            })
+            return axios.get(`/api/cPanel/house/get_all`)
         })
     }
     const storeHouse = async (data) => {

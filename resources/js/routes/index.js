@@ -72,7 +72,7 @@ const routes =
                         __name: 'Home',
                         icon: '<i class="fa-thin fa-chart-bar"></i>',
                         current: false,
-                        sideBar: false,
+                        sideBar: true,
                     },
                     components: {
                         cPanel: {
@@ -86,7 +86,7 @@ const routes =
                             meta: {
                                 __name: 'Analyse',
                                 toggle: false,
-                                sideBar: false,
+                                sideBar: true,
                             },
                             components: {
                                 home: () => import('../layouts/cPanel/home/analyse.vue')
