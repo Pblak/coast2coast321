@@ -184,6 +184,7 @@ export default {
         this.setIsClosed()
         window.addEventListener('online', this.updateOnlineStatus)
         window.addEventListener('offline', this.updateOnlineStatus)
+
     },
     data() {
         const dashboard_name = 'cPanel'
@@ -239,16 +240,16 @@ export default {
 
         return {
             toggle_render,
-            dashboard_name,
-            user: store.state.auth.user,
-            navs: [],
             setup_navLinks,
             parentActive,
             childActive,
+            isClosed,
+            dashboard_name,
+            user: store.state.auth.user,
+            navs: [],
             online: navigator.onLine,
             showBackOnline: false,
             hideShowOffline: false,
-            isClosed
         }
     },
 }

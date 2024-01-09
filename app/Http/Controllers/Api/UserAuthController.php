@@ -13,7 +13,6 @@ use Illuminate\Validation\Rules\Password;
 
 class   UserAuthController extends Controller
 {
-
     public function get_all(): \Illuminate\Database\Eloquent\Collection|array
     {
         return User::with(['houses'])->get();
@@ -75,7 +74,7 @@ class   UserAuthController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'type' => "user",
+                'type' => "broker",
                 'phone' => $request->phone,
                 'password' => $request->password,
             ]);
@@ -83,6 +82,7 @@ class   UserAuthController extends Controller
             return  response()->json(['success' => true]);
         }catch (\Exception $exception){
             DB::rollBack();
+            dump($exception->getMessage());
         }
 
     }

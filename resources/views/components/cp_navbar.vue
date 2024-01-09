@@ -33,6 +33,13 @@
 
         </div>
         <div class="flex flex-1 items-center justify-end  px-8 gap-4">
+            <router-link :to="messageRoute" class="_btn _btn-default rounded-full py-1 px-2">
+                <span
+                    class="flex-shrink-0 w-6 h-6 text-lg
+                          duration-75 group-hover:text-gray-900 dark:group-hover:text-white
+                          transition-all group-hover:scale-125  "
+                    v-html="$route.matched[this.$route.matched.length - 2].name===messageRoute.name? messageRoute.meta.icon.replace('fa-thin','fa-duotone'):messageRoute.meta.icon"></span>
+            </router-link>
             <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
                     data-dropdown-placement="bottom-end"
                     class="flex h-10 w-10 mx-3 justify-center items-center font-bold bg-gray-800 rounded-full md:mr-0 focus:ring-4
@@ -210,6 +217,7 @@ export default {
             }),
             darkMode,
             _capitalize,
+            messageRoute:this.$router.resolve({name:'message'})
         }
     },
     watch: {

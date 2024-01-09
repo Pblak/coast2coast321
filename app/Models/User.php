@@ -46,8 +46,11 @@ class User extends Authenticatable
         'address' => 'object',
     ];
 
-
     public function houses(){
         return $this->hasMany(House::class);
     }
+
+   /* public function messages(){
+        return $this->hasMany(Message::class);
+    }*/
 }

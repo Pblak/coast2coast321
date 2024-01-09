@@ -67,6 +67,51 @@ const routes =
                     },
                 },
                 {
+                    path: 'message',
+                    name: 'message',
+                    meta: {
+                        __name: 'Message',
+                        icon: '<i class="fa-thin fa-comments"></i>',
+                        current: false,
+                        sideBar: false,
+                    },
+                    redirect: {name: 'chat_area'},
+                    components: {
+                        cPanel: {
+                            template: '<router-view name="message"></router-view>'
+                        }
+                    },
+                    children:[
+                        {
+                            path:'chat_area',
+                            name:'chat_area',
+                            meta: {
+                                __name: 'Chat & messaging',
+                                toggle: false,
+                                sideBar: false,
+                            },
+                            redirect: {name: 'create_message'},
+                            components:{
+                                message:() => import('../layouts/cPanel/message/index.vue')
+                            },
+                            children:[
+                                {
+                                    path:'create_message/:id?',
+                                    name:'create_message',
+                                    meta: {
+                                        __name: 'Messages',
+                                        toggle: false,
+                                        sideBar: false,
+                                    },
+                                    components:{
+                                        chat_area:() => import('../layouts/cPanel/message/create_message.vue')
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     path: 'home',
                     meta: {
                         __name: 'Home',
@@ -264,6 +309,36 @@ const routes =
                         },
                     ]
                 },
+                {
+                    path: 'Finance',
+                    meta: {
+                        __name: 'Finance',
+                        icon: '<i class="fa-thin fa-dollar-sign"></i>',
+                        current: false,
+                        sideBar: true,
+                    },
+                    components: {
+                        cPanel: {
+                            template: '<router-view name="finance"></router-view>'
+                        }
+                    },
+                    children:[
+                        {
+                            path: 'list_finance',
+                            name: 'list_finance',
+                            meta: {
+                                __name: 'List of all the finance',
+                                toggle: false,
+                                sideBar: true,
+                            },
+                            components: {
+                                finance: {
+                                    template:'<div>List of all the finance</div>'
+                                }
+                            },
+                        },
+                    ]
+                }
             ]
         },
         {
