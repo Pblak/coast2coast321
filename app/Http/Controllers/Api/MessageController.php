@@ -7,37 +7,50 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function get_latest_user_message()
     {
-        //
+        $authUserId = auth()->id();
+
+        $latestMessages = Message::whereIn('id', function ($query) use ($authUserId) {
+            $query->selectRaw('MAX(id)')
+                ->from('messages')
+                ->where(function ($subquery) use ($authUserId) {
+                    $subquery->where('from_id', $authUserId)
+                        ->orWhere('to_id', $authUserId);
+                })
+                ->groupBy(DB::raw('IF(messages.from_id = '.$authUserId.', messages.to_id, messages.from_id)'));
+        })
+            ->get();
+        return $latestMessages;
     }
 
     public function get_user_messages(Request $request)
     {
 
-        $messages =  Message::where(function ($query) use ($request) {
-
+        $messages = Message::where(function ($query) use ($request) {
             $query->where('from_id', $request->user_id)->where('to_id', auth()->user()->id);
         })->orWhere(function ($query) use ($request) {
-            $query->where('from_id', auth()->user()->id) ->where('to_id', $request->user_id);
+            $query->where('from_id', auth()->user()->id)->where('to_id', $request->user_id);
         })->get();
         $groupedMessages = $messages->groupBy(function ($message) {
             // Round the timestamp to the nearest 50 seconds
-            return   Carbon::parse($message->created_at)
+            return Carbon::parse($message->created_at)
                 ->second(floor(Carbon::parse($message->created_at)->second / 50) * 50)
-                ->format('Y-m-d H:i:s');
+                ->timestamp;
         })/*->map(function ($group) {
             return $group->groupBy('from_id');
-        })*/;
+        })*/
+        ;
         $data = collect([
-           'messages'=>$groupedMessages,
-           'user_subject'=>User::where('id',$request->user_id)->get()->first(),
+            'messages' => $groupedMessages,
+            'user_subject' => User::where('id', $request->user_id)->get()->first(),
         ]);
         return $data;
     }
@@ -56,9 +69,9 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         Message::create([
-            'from_id'=>auth()->id(),
-            'to_id'=>$request->to_id,
-            'content'=>$request->msg_content,
+            'from_id' => auth()->id(),
+            'to_id' => $request->to_id,
+            'content' => $request->msg_content,
         ]);
     }
 

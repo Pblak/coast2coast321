@@ -30,6 +30,7 @@ Route::group(['prefix' => 'cPanel', 'middleware' => [ 'auth:sanctum']], function
 
     Route::post('message/get_user_messages', [App\Http\Controllers\Api\MessageController::class, 'get_user_messages']);
     Route::post('message/store', [App\Http\Controllers\Api\MessageController::class, 'store']);
+    Route::get('message/get_latest_user_message', [App\Http\Controllers\Api\MessageController::class, 'get_latest_user_message']);
 
 
     /*Route::get('book/get_all', [App\Http\Controllers\Api\BookController::class, 'get_all']);

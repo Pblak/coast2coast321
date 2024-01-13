@@ -23,11 +23,24 @@ export default () => {
         })
     }
 
+    /**
+     * get the latest  message from each user
+     * and auth()->id() as subject user
+     */
+    const get_latest_user_message = async () => {
+        return await axios.get('/sanctum/csrf-cookie').then(response => {
+            return axios.get(`/api/cPanel/message/get_latest_user_message`)
+                .catch(err => {
+                errors.value = err.response.data.errors
+            })
+        })
+    }
 
     return {
         messages,
         errors,
         store_message,
+        get_latest_user_message,
         get_user_messages
     }
 }

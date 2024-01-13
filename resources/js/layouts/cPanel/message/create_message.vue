@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col min-h-0 w-full" v-if="data">
-        <div class="flex justify-between p-4 border-b dark:border-gray-500 " v-if="data.user_subject">
+        <div class="flex justify-between p-4 border-b dark:border-gray-600 border-gray-400 " v-if="data.user_subject">
             <div class="flex gap-4 items-center justify-center">
                 <div :style="'background-image: url(data:image/png;base64,'+data.user_subject.avatar +')'"
                      class="flex h-10 w-10 dark:bg-gray-700 justify-center items-center font-bold rounded-full bg-center bg-no-repeat bg-cover">
@@ -23,13 +23,13 @@
                         <template v-for=" ( message,i)  in init_msg">
                             <div class="py-0.5 flex justify-end "
                                  v-if="message.from_id === store.state.auth.user.id">
-                                <div class="w-fit px-4 py-2 rounded-full bg-blue-600 text-white"
+                                <div class="w-fit px-4 py-2 rounded-3xl bg-blue-600 text-white"
                                      :class="msg_frame(i,init_msg )">
                                     {{ message.content }}
                                 </div>
                             </div>
                             <div v-else class="py-0.5 ">
-                                <div class=" w-fit px-4 py-2 rounded-full bg-gray-200 dark:bg-gray-700"
+                                <div class=" w-fit px-4 py-2 rounded-3xl bg-gray-200 dark:bg-gray-700"
                                      :class="msg_frame(i,init_msg )">
                                     {{ message.content }}
                                 </div>
@@ -39,7 +39,7 @@
                 </template>
             </div>
         </div>
-        <div class="p-4  border-t dark:border-gray-500">
+        <div class="p-4  border-t dark:border-gray-600 border-gray-400">
             <div>
                 <form action="" class="items-center flex gap-2" v-if="data.user_subject">
                     <div class="flex-1">
@@ -80,29 +80,29 @@ export default {
                 let is_first = i === 0 ? true : msg[i - 1].from_id !== store.state.auth.user.id
                 let is_last = i === Object.values(msg).length - 1 ? true : msg[i + 1].from_id !== store.state.auth.user.id
                 if (is_first && !is_last) {
-                    return 'rounded-br-lg'
+                    return 'rounded-br'
                 }
                 if (is_first && is_last) {
                     return ''
                 }
                 if (is_last) {
-                    return 'rounded-tr-lg'
+                    return 'rounded-tr'
                 } else {
-                    return 'rounded-r-lg'
+                    return 'rounded-r'
                 }
             } else {
                 let is_first = i === 0 ? true : msg[i - 1].from_id === store.state.auth.user.id
                 let is_last = i === Object.values(msg).length - 1 ? true : msg[i + 1].from_id === store.state.auth.user.id
                 if (is_first && !is_last) {
-                    return 'rounded-bl-lg'
+                    return 'rounded-bl'
                 }
                 if (is_first && is_last) {
                     return ''
                 }
                 if (is_last) {
-                    return 'rounded-tl-lg'
+                    return 'rounded-tl'
                 } else {
-                    return 'rounded-l-lg'
+                    return 'rounded-l'
                 }
 
             }
@@ -119,9 +119,13 @@ export default {
             })
         }
     },
+
     mounted() {
         if (this.$route.params.id) {
-           setInterval(()=>{
+            this.get_user_messages({
+                user_id: this.$route.params.id
+            })
+            this.interval = setInterval(()=>{
                this.get_user_messages({
                    user_id: this.$route.params.id
                })
@@ -144,10 +148,15 @@ export default {
         return {
             data: messages,
             msg_content:'',
+            interval:'',
             store_message,
             get_user_messages,
         }
-    }
+    },
+    beforeRouteLeave(to, from, next) {
+        clearInterval(this.interval);
+        next();
+    },
 
 }
 </script>

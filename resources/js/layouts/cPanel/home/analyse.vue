@@ -53,18 +53,16 @@
                                                     data-update-color="updateColor"></chart_>
                                         </div>
                                         <div class="flex gap-4 items-center">
-                                            <div class="rounded-full w-10 h-10 bg-no-repeat bg-center bg-cover flex items-center
-                                                                                     border border-gray-300 dark:border-gray-700 justify-center "
+                                            <div class="rounded-full w-10 h-10 bg-no-repeat dark:border-gray-700 justify-center
+                                             bg-center bg-cover flex items-center border border-gray-300 "
                                                  :style="'background-image: url(data:image/png;base64,'+user.avatar+')'">
-
-                                                                                        <span v-if="!user.avatar"
-                                                                                              class="">{{
-                                                                                                (user.name[0] + user.name[1]).toUpperCase()
-                                                                                            }}</span>
+                                                    <span v-if="!user.avatar"
+                                                          class="">{{ (user.name[0] + user.name[1]).toUpperCase() }}
+                                                    </span>
                                             </div>
-                                            <div class="flex flex-col gap-2">
-                                                <p class="font-bold"> {{ user.name }}</p>
-                                                <p class="text-sm"> {{ user.email }}</p>
+                                            <div class="flex flex-col gap-2 w-24">
+                                                <p class="font-bold truncate "> {{ user.name }}</p>
+                                                <p class="text-sm truncate "> {{ user.email }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -84,11 +82,12 @@
                 </div>
             </div>
             <div class="md:col-span-3 ">
-                <div class="flex flex-col gap-4 dark:bg-gray-800 bg-gray-200 p-4 rounded-lg">
+                <div
+                    class="flex flex-col gap-4 dark:bg-gray-800 bg-gray-200 p-4 rounded-lg dark:text-white text-gray-900">
                     <div class="text-2xl font-bold ">
                         Popular Flats & houses
                     </div>
-                    <table id="houseTable" class="display"> </table>
+                    <table id="houseTable" class="display"></table>
                 </div>
             </div>
 
