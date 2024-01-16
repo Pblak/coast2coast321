@@ -40,14 +40,11 @@ class MessageController extends Controller
             $query->where('from_id', auth()->user()->id)->where('to_id', $request->user_id);
         })->get();
         $groupedMessages = $messages->groupBy(function ($message) {
-            // Round the timestamp to the nearest 50 seconds
+            // Round the timestamp to the nearest 30 seconds
             return Carbon::parse($message->created_at)
-                ->second(floor(Carbon::parse($message->created_at)->second / 50) * 50)
+                ->second(round(Carbon::parse($message->created_at)->second / 30) * 30)
                 ->timestamp;
-        })/*->map(function ($group) {
-            return $group->groupBy('from_id');
-        })*/
-        ;
+        });
         $data = collect([
             'messages' => $groupedMessages,
             'user_subject' => User::where('id', $request->user_id)->get()->first(),
@@ -68,10 +65,13 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        Message::create([
+       // dd(now()->timestamp);
+        Message::insert([
             'from_id' => auth()->id(),
             'to_id' => $request->to_id,
             'content' => $request->msg_content,
+            'created_at'=> now()->timestamp,
+            'updated_at'=> now()->timestamp,
         ]);
     }
 
