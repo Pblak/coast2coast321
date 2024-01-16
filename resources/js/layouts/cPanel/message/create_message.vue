@@ -1,6 +1,7 @@
 <template>
-    <div class="flex flex-col min-h-0 w-full" v-if="data">
-        <div class="flex justify-between p-4 border-b dark:border-gray-600 border-gray-400 " v-if="data.user_subject">
+    <div class="flex flex-col min-h-0 w-full relative" v-if="data">
+        <div class="flex justify-between p-4 absolute top-0 right-0 w-full bg-gray-900/10 backdrop-blur-2xl"
+             v-if="data.user_subject">
             <div class="flex gap-4 items-center justify-center">
                 <div :style="'background-image: url(data:image/png;base64,'+data.user_subject.avatar +')'"
                      class="flex h-10 w-10 dark:bg-gray-700 justify-center items-center font-bold rounded-full bg-center bg-no-repeat bg-cover">
@@ -16,7 +17,7 @@
             </div>
 
         </div>
-        <div class="flex-1  min-h-0 overflow-y-auto" id="messages_container">
+        <div class="flex-1  min-h-0 overflow-y-auto pt-20" id="messages_container">
             <div class="flex-1  px-4">
                 <template v-for="(init_msg,key) in data.messages">
                     <div class="mb-8">
@@ -116,6 +117,12 @@ export default {
                 this.get_user_messages({
                     user_id: this.$route.params.id
                 })
+                const event = new CustomEvent('newMessage', {
+                    detail: {
+                        from_id:store.state.auth.user.id
+                    }
+                });
+                window.dispatchEvent(event)
             })
         }
     },
@@ -125,11 +132,11 @@ export default {
             this.get_user_messages({
                 user_id: this.$route.params.id
             })
-            this.interval = setInterval(()=>{
+            /*this.interval = setInterval(()=>{
                this.get_user_messages({
                    user_id: this.$route.params.id
                })
-           },5000)
+           },5000)*/
             $('#msg_content').off()
             $(document).on('keypress', '#msg_content', (e) => {
                 // console.log(e)
@@ -153,6 +160,16 @@ export default {
             get_user_messages,
         }
     },
+    watch: {
+        '$route.params.id': function(newId, oldId) {
+            // Do something with the new value of this.$route.params.id
+            if (oldId === newId) return;
+            this.get_user_messages({
+                user_id: newId
+            })
+        }
+    },
+
     beforeRouteLeave(to, from, next) {
         clearInterval(this.interval);
         next();

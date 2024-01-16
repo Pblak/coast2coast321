@@ -14,6 +14,8 @@ class Message extends Model
     ];
 
 
+
+
     public function getUserAttribute(){
         if ($this->from_id === auth()->id()){
             return User::where('id',$this->to_id )->get()->first();

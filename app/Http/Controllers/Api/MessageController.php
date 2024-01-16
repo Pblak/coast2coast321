@@ -16,19 +16,21 @@ class MessageController extends Controller
      */
     public function get_latest_user_message()
     {
-        $authUserId = auth()->id();
+        $users = User::with(['sentMessages', 'receivedMessages'])->get(['id','name']);
+        $users->map(function ($user){
+            $sentMessages = $user->sentMessages;
+            $receivedMessages = $user->receivedMessages;
 
-        $latestMessages = Message::whereIn('id', function ($query) use ($authUserId) {
-            $query->selectRaw('MAX(id)')
-                ->from('messages')
-                ->where(function ($subquery) use ($authUserId) {
-                    $subquery->where('from_id', $authUserId)
-                        ->orWhere('to_id', $authUserId);
-                })
-                ->groupBy(DB::raw('IF(messages.from_id = '.$authUserId.', messages.to_id, messages.from_id)'));
-        })
-            ->get();
-        return $latestMessages;
+            // Merge sent and received messages into a single collection
+            $allMessages = $sentMessages->merge($receivedMessages);
+
+            $user['latest_message']=$allMessages->sortByDesc('created_at')->first();
+            $user['latest_message_at']=$user['latest_message']?$user['latest_message']->created_at->timestamp:0;
+        });
+          $users= $users->sortByDesc(function ($user) {
+              return optional(optional($user['latest_message'])['created_at'])->timestamp ?? 0;
+          });
+          return $users->values()->all();
     }
 
     public function get_user_messages(Request $request)
@@ -42,7 +44,7 @@ class MessageController extends Controller
         $groupedMessages = $messages->groupBy(function ($message) {
             // Round the timestamp to the nearest 30 seconds
             return Carbon::parse($message->created_at)
-                ->second(round(Carbon::parse($message->created_at)->second / 30) * 30)
+                ->second(round(Carbon::parse($message->created_at)->second / 60) * 60)
                 ->timestamp;
         });
         $data = collect([

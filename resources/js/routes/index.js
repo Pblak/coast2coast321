@@ -90,7 +90,6 @@ const routes =
                                 toggle: false,
                                 sideBar: false,
                             },
-                            redirect: {name: 'create_message'},
                             components:{
                                 message:() => import('../layouts/cPanel/message/index.vue')
                             },
